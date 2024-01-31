@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Important Survey!</title>
+  <style>
+    body {
+      background-color: #ffb6c1;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .question {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .answerBox {
+      width: 400px;
+      height: 40px;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .button {
+      background-color: #ff80bf;
+      color: white;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #finishButton {
+      background-color: #ff6666;
+    }
+
+    #valentineButton {
+      background-color: #ff80bf;
+    }
+
+    #noButton {
+      background-color: #ff6666;
+    }
+
+    #loveButton {
+      background-color: #ff80bf;
+    }
+
+    #claimPresentButton {
+      background-color: #ff0000;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .hoverEffect {
+      transition: transform 1s, left 1s, top 1s;
+    }
+
+    .hoverEffect:hover {
+      transform: translateX(500px);
+    }
+
+    #secondGif {
+      width: 100%;
+      max-width: 1200px;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    .tenor-gif-embed {
+      background-color: transparent !important;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <h1>Are You Up for a Quick Survey?</h1>
+    <button class="button" onclick="startSurvey()">Yes</button>
+  </div>
+
+  <div class="container" id="surveyContainer" style="display: none;">
+    <div id="questionDiv">
+      <h2 class="question" id="questionText"></h2>
+      <input type="text" class="answerBox" id="answerBox">
+      <button class="button" onclick="nextQuestion()">Next Question</button>
+    </div>
+
+    <div id="finishDiv" style="display: none;">
+      <h2>You have Completed all of the Survey Questions! Are you still up for one more Question?</h2>
+      <button class="button" id="finishButton" onclick="finalQuestion()">Yes</button>
+    </div>
+
+    <div id="valentineDiv" style="display: none;">
+      <h2>Do you want to be my valentine?</h2>
+      <div class="tenor-gif-embed" data-postid="15193177280475281241" data-share-method="host" data-aspect-ratio="0.939759" data-width="100%">
+        <a href="https://tenor.com/view/dudu-gif-15193177280475281241">Dudu Sticker</a> from <a href="https://tenor.com/search/dudu-stickers">Dudu Stickers</a>
+      </div>
+      <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+      <div style="margin-top: 20px;">
+        <button class="button" id="valentineButton" onclick="celebrate()">Yes</button>
+        <button class="button hoverEffect" id="noButton" onmousemove="moveButton()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="celebrationDiv" style="display: none;">
+    <h1>Yaaayy!!</h1>
+    <div id="secondGif" class="tenor-gif-embed" data-postid="15436884578914915591" data-share-method="host" data-aspect-ratio="0.939759" data-width="400px">
+      <a href="https://tenor.com/view/github-sticker-gif-15436884578914915591">Github Sticker Sticker</a> from <a href="https://tenor.com/search/github+sticker-stickers">Github Sticker Stickers</a>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    
+    <div style="margin-top: 20px;">
+      <button class="button" id="loveButton" onclick="sayILoveYou()">I LOVE YOU!</button>
+      <button class="button" id="claimPresentButton" onclick="claimPresent()">CLAIM PRESENT</button>
+    </div>
+  </div>
+
+  <script>
+    let currentQuestion = 1;
+
+    function startSurvey() {
+      document.getElementById('container').style.display = 'none';
+      document.getElementById('surveyContainer').style.display = 'block';
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const questions = [
+        "What did you eat for breakfast?",
+        "What do you like to do when it's rainy?",
+        "Who do you think is your celebrity look-a-like?",
+        "Do you plan on bugging the love of your life every single day for the foreseeable future? and Why?",
+        "Are you feeling happy today?"
+      ];
+
+      document.getElementById('questionText').innerText = "Question " + currentQuestion + ": " + questions[currentQuestion - 1];
+      document.getElementById('answerBox').value = "";
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion <= 5) {
+        showQuestion();
+      } else {
+        document.getElementById('questionDiv').style.display = 'none';
+        document.getElementById('finishDiv').style.display = 'block';
+      }
+    }
+
+    function finalQuestion() {
+      document.getElementById('finishDiv').style.display = 'none';
+      document.getElementById('valentineDiv').style.display = 'block';
+    }
+
+    function celebrate() {
+      document.getElementById('valentineDiv').style.display = 'none';
+      document.getElementById('celebrationDiv').style.display = 'block';
+      document.getElementById('noButton').style.display = 'none';
+    }
+
+    function moveButton() {
+      const noButton = document.getElementById('noButton');
+      noButton.classList.add('hoverEffect');
+      const xPos = Math.floor(Math.random() * window.innerWidth);
+      const yPos = Math.floor(Math.random() * window.innerHeight);
+      noButton.style.position = 'absolute';
+      noButton.style.left = xPos + 'px';
+      noButton.style.top = yPos + 'px';
+    }
+
+    function sayILoveYou() {
+      alert("I LOVE YOU!");
+    }
+
+    function claimPresent() {
+      alert("PRESENT CLAIMED!");
+    }
+  </script>
+</body>
+</html>
